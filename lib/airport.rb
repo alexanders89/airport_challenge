@@ -6,10 +6,11 @@ class Airport
 
   def initialize(capacity = DEFAULT_CAPACITY)
     @planes = []
-    @capacity = capacity
+    @default_capacity = capacity
   end
 
   def land(plane)
+    raise "Airport is full!" if @planes.count >= DEFAULT_CAPACITY
     @planes << plane
     plane
   end
@@ -20,7 +21,7 @@ class Airport
   end
 
   def capacity
-    @capacity
+    @default_capacity - @planes.count
   end
 
 
