@@ -20,4 +20,15 @@ describe Plane do
       expect(airport.planes[0]).to eq subject
     end
   end
+
+  context 'taking off' do
+    it 'responds to take off' do
+      expect(subject).to respond_to :take_off
+    end
+
+    it 'can take off from an airport' do
+      airport = double(:airport, planes: [])
+      expect { subject.take_off(airport) }.to_not raise_error
+    end
+  end
 end
