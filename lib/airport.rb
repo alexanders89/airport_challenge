@@ -10,7 +10,7 @@ class Airport
   end
 
   def land(plane)
-    raise "Airport is full!" if @planes.count >= DEFAULT_CAPACITY
+    raise "Airport is full!" if full?
     @planes << plane
     plane
   end
@@ -20,8 +20,12 @@ class Airport
     plane
   end
 
-  def capacity
-    @default_capacity - @planes.count
+  # def capacity
+  #   @default_capacity - @planes.count
+  # end
+
+  def full?
+    @planes.count == DEFAULT_CAPACITY
   end
 
 

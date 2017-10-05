@@ -1,6 +1,7 @@
 require './lib/airport'
 
 describe Airport do
+  let(:plane) { double :plane}
 
   context 'basics' do
 
@@ -9,36 +10,36 @@ describe Airport do
     end
 
     it 'landed planes show in the airport array of planes' do
-      plane = Plane.new
-      plane.land(subject)
+      subject.land(plane)
       expect(subject.planes[0]).to eq plane
     end
 
     it 'taken off planes are removed from array' do
-      plane = Plane.new
-      plane.land(subject)
-      plane.take_off(subject)
+      subject.land(plane)
+      subject.take_off(plane)
       expect(subject.planes.count).to eq 0
     end
   end
 
   context 'landing planes' do
     it 'can land plane' do
-      plane = Plane.new
       expect(subject.land(plane)).to eq plane
     end
 
     it 'will not allow landing when at capacity' do
       20.times do
-        subject.land(Plane.new)
+        subject.land(plane)
       end
-      expect { subject.land(Plane.new) }.to raise_error "Airport is full!"
+      expect { subject.land(plane) }.to raise_error "Airport is full!"
+    end
+
+    it 'will not allow landing when the weather is stormy' do
+
     end
   end
 
   context 'taking off planes' do
     it 'can take off a plane' do
-      plane = Plane.new
       subject.land(plane)
       expect(subject.take_off(plane)).to eq plane
     end
